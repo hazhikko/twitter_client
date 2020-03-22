@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget with PreferredSizeWidget{
+  final String headerTitle;
+  Header({this.headerTitle});
+
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
@@ -12,7 +15,7 @@ class Header extends StatelessWidget with PreferredSizeWidget{
         child: UserIcon(),
       ),
       title: Center(
-        child: Text('ホーム'),
+        child: Text(headerTitle),
       ),
       actions: <Widget>[
         Padding(
