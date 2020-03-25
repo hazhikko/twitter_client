@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'header.dart';
 import 'root.dart';
 
 void main() => runApp(MyApp());
@@ -12,8 +11,6 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.pink[100],
       ),
       home: Scaffold(   
-        appBar: Header(),
-        body: Center(child: Text('ホーム')),
         bottomNavigationBar: RootWidget(),
       ),
     );
