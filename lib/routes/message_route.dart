@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import '../header.dart';
  
 class Message extends StatelessWidget {
-  final String screenName = 'メッセージ';
+  final String headerTitle = 'メッセージ';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(headerTitle: screenName),
-      body: Center(child: Text(screenName)),
+      appBar: Header(headerTitle: headerTitle),
+      body: Center(child: Text(headerTitle)),
     );
   }
 }
