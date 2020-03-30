@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../header.dart';
+import '../ui/header.dart';
  
 class Message extends StatelessWidget {
   final String headerTitle = 'メッセージ';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../header.dart';
+import '../ui/header.dart';
  
 class Search extends StatelessWidget {
   final String headerTitle = '検索';

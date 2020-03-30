@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_1user/twitter_1user.dart';
-import 'dart:convert';
-import 'dart:collection';
-import '../header.dart';
+import '../ui/header.dart';
+import '../model/twitter_card_model.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,56 +9,41 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   final String headerTitle = 'ホーム';
-  LinkedHashMap _tweets = LinkedHashMap();
-  String _timelineData = '';
+  List _cardList = List<TwitterCardModel>();
 
   @override
   void initState() {
     super.initState();
     _load();
+    setState(() {});
   }
 
   Future<void> _load() async {
-    final String apiKey = 'Twitter Developerで取得したAPI Key';
-    final String apiSecret = 'Twitter Developerで取得したAPI secret key';
-    final String accessToken = 'Twitter Developerで取得したAccess token';
-    final String accessSecret = 'Twitter Developerで取得したAccess token secret';
-
-    final String userTimelinePath = 'statuses/home_timeline.json';
-
-    Twitter twitter = new Twitter(apiKey, apiSecret, accessToken, accessSecret);
-
-    final res = jsonDecode(await twitter.request('GET', userTimelinePath, {'count': '30'}));
-    setState(() {
-      for (int i = 0; i < res.length; i++){
-        _tweets[i] = {
-          'screenName' : res[i]['user']['screen_name'],
-          'profileImageUrlHttps' : res[i]['user']['profile_image_url_https'],
-          'text' : res[i]['text'],
-        };
-      }
-    });
+    _cardList = await TwitterCardModel().CreateCardList('home_timeline');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(headerTitle: headerTitle),
-      body: ListView.builder(
-        itemCount: _tweets.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(_tweets[index]['profileImageUrlHttps']),
+      body: FutureBuilder(
+        future: _load(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return ListView.builder(
+              itemCount: _cardList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _cardList[index];
+              }
+            );
+          } else {
+            return Center(child:
+              Container(
+                child: CircularProgressIndicator(),
               ),
-              title: Text(_tweets[index]['screenName']),
-              subtitle: Text(_tweets[index]['text']),
-              trailing: Icon(Icons.keyboard_arrow_down),
-              isThreeLine: true,
-            ),
-          );
-        },
+            );
+          }
+        }
       ),
     );
   }
