@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: any
   twitter_1user: ^1.0.1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
