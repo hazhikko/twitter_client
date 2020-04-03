@@ -1,5 +1,6 @@
 import '../ui/custom_card.dart';
 import '../model/twitter_api_model.dart';
+import '../util/convert_text.dart';
 
 class TwitterCardModel {
 
@@ -8,26 +9,21 @@ class TwitterCardModel {
     final _tweets = await GetTweetsJson(apiName);
 
     CustomCard customCard = CustomCard();
-    for (var i = 0; i < _tweets['screenName'].length; i++) {
-      _cardList.add(customCard.createCard(
-                      'text1',
-                      _tweets['screenName'][i],
-                      _tweets['profileImageUrlHttps'][i],
-                      _tweets['text'][i],
-                    ));
+    for (var i = 0; i < _tweets.length; i++) {
+      _cardList.add(customCard.createCard('text1', _tweets[i]));
     }
     return _cardList;
   }
 
-  Future<Map> GetTweetsJson(String apiName) async{
-    String _userTimelinePath = 'statuses/home_timeline.json';
+  Future<List> GetTweetsJson(String apiName) async{
+    String _userTimelinePath;
     Map<String, String> _userTimelineParam;
 
     switch (apiName) {
       case 'home_timeline':
           _userTimelinePath = 'statuses/home_timeline.json';
           _userTimelineParam = {
-            'count': '50',
+            'count': '3',
             'include_entities': 'true',
           };
         break;
@@ -39,18 +35,21 @@ class TwitterCardModel {
           };
     }
 
-    Map<String, List<String>> _tweets = {
-      'screenName':[],
-      'profileImageUrlHttps':[],
-      'text':[],
-    };
-
     final jsonData = await TwitterApiModel().GetJson(_userTimelinePath, _userTimelineParam);
-
+    List _tweets = [];
     for (int i = 0; i < jsonData.length; i++){
-      _tweets['screenName'].add(jsonData[i]['user']['screen_name']);
-      _tweets['profileImageUrlHttps'].add(jsonData[i]['user']['profile_image_url_https']);
-      _tweets['text'].add(jsonData[i]['text']);
+      final String _timeText = ConvertText().TwitterTimetamp(jsonData[i]['created_at']);
+      _tweets.add(
+        {
+          'timeText': _timeText,
+          'name': jsonData[i]['user']['name'],
+          'screenName': jsonData[i]['user']['screen_name'],
+          'profileImageUrlHttps': jsonData[i]['user']['profile_image_url_https'],
+          'text': jsonData[i]['text'],
+          'favoriteCount': jsonData[i]['favorite_count'],
+          'retweetCount': jsonData[i]['retweet_count'],
+        }
+      );
     }
     return _tweets;
   }
