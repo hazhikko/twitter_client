@@ -161,7 +161,7 @@ class _FooterButtons extends StatelessWidget {
               iconSize: 18.0,
               onPressed: () {},
             ),
-            Text(_tweetData['favoriteCount'].toString()),
+            Text(_tweetData['retweetCount'].toString()),
           ],
         ),
         Row(
@@ -171,7 +171,7 @@ class _FooterButtons extends StatelessWidget {
               iconSize: 18.0,
               onPressed: () {},
             ),
-            Text(_tweetData['retweetCount'].toString()),
+            Text(_tweetData['favoriteCount'].toString()),
           ],
         ),
         IconButton(
