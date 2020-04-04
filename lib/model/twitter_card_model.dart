@@ -1,6 +1,7 @@
 import '../ui/custom_card.dart';
 import '../model/twitter_api_model.dart';
 import '../util/convert_text.dart';
+import '../util/get_local_object.dart';
 
 class TwitterCardModel {
 
@@ -44,7 +45,8 @@ class TwitterCardModel {
           };
     }
 
-    final jsonData = await TwitterApiModel().getJson(_userTimelinePath, _userTimelineParam);
+    // final jsonData = await TwitterApiModel().getJson(_userTimelinePath, _userTimelineParam);
+    final jsonData = await LoadLocalJson().getJson('jsons/timeline.json');
     List _tweets = [];
     for (int i = 0; i < jsonData.length; i++){
       final String _timeText = ConvertText().twitterTimetamp(jsonData[i]['created_at']);
