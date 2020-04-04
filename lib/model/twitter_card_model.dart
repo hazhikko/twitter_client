@@ -46,8 +46,8 @@ class TwitterCardModel {
           'screenName': jsonData[i]['user']['screen_name'],
           'profileImageUrlHttps': jsonData[i]['user']['profile_image_url_https'],
           'text': jsonData[i]['text'],
-          'favoriteCount': jsonData[i]['favorite_count'],
-          'retweetCount': jsonData[i]['retweet_count'],
+          'favoriteCount': jsonData[i]['favorite_count'] != 0 ? jsonData[i]['favorite_count'] : '',
+          'retweetCount': jsonData[i]['retweet_count'] != 0 ? jsonData[i]['retweet_count'] : '',
         }
       );
     }
