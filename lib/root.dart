@@ -15,7 +15,7 @@ class _RootWidget extends State<RootWidget> {
   final _bottomNavigationBarItems = <BottomNavigationBarItem>[];
 
   // アイコン情報
-  final Map _RootWidgetIcons = {
+  final Map _rootWidgetIcons = {
     'ホーム' : {'icon': Icons.home, 'route': Home()},
     '検索' : {'icon': Icons.search, 'route': Search()},
     '通知' : {'icon': Icons.notifications, 'route': Notice()},
@@ -34,14 +34,14 @@ class _RootWidget extends State<RootWidget> {
   void initState() {
     super.initState();
     for ( var i = 0; i < _footerItemOrder.length; i++) {
-      _bottomNavigationBarItems.add(_CreateIcon(_footerItemOrder[i]));
+      _bottomNavigationBarItems.add(_createIcon(_footerItemOrder[i]));
     }
   }
 
   // アイコンを作成する
-  BottomNavigationBarItem _CreateIcon(String key) {
+  BottomNavigationBarItem _createIcon(String key) {
     return BottomNavigationBarItem(
-      icon: Icon(_RootWidgetIcons[key]['icon']),
+      icon: Icon(_rootWidgetIcons[key]['icon']),
       title: Text(key),
     );
   }
@@ -55,7 +55,7 @@ class _RootWidget extends State<RootWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body : _RootWidgetIcons[_footerItemOrder.asMap()[_selectedIndex]]['route'],
+      body : _rootWidgetIcons[_footerItemOrder.asMap()[_selectedIndex]]['route'],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: _bottomNavigationBarItems,

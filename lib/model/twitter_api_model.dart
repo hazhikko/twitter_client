@@ -2,7 +2,7 @@ import 'package:twitter_1user/twitter_1user.dart';
 import 'dart:convert';
 
 class TwitterApiModel {
-  Future GetJson(String path, Map param) async {
+  Future getJson(String path, Map param) async {
     final String apiKey = 'Twitter Developerで取得したAPI Key';
     final String apiSecret = 'Twitter Developerで取得したAPI secret key';
     final String accessToken = 'Twitter Developerで取得したAccess token';

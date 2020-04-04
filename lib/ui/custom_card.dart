@@ -78,7 +78,7 @@ class _BaseCard extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  Map _tweetData;
+  final Map _tweetData;
   
   _Header(
     this._tweetData,
@@ -134,7 +134,7 @@ class _Header extends StatelessWidget {
 }
 
 class _FooterButtons extends StatelessWidget {
-  Map _tweetData;
+  final Map _tweetData;
   _FooterButtons(
     this._tweetData,
   );

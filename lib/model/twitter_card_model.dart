@@ -4,9 +4,9 @@ import '../util/convert_text.dart';
 
 class TwitterCardModel {
 
-  Future<List> CreateCardList(String apiName) async{
+  Future<List> createCardList(String apiName) async{
     List _cardList = [];
-    final _tweets = await GetTweetsJson(apiName);
+    final _tweets = await getTweetsJson(apiName);
 
     CustomCard customCard = CustomCard();
     for (var i = 0; i < _tweets.length; i++) {
@@ -15,7 +15,7 @@ class TwitterCardModel {
     return _cardList;
   }
 
-  Future<List> GetTweetsJson(String apiName) async{
+  Future<List> getTweetsJson(String apiName) async{
     String _userTimelinePath;
     Map<String, String> _userTimelineParam;
 
@@ -35,10 +35,10 @@ class TwitterCardModel {
           };
     }
 
-    final jsonData = await TwitterApiModel().GetJson(_userTimelinePath, _userTimelineParam);
+    final jsonData = await TwitterApiModel().getJson(_userTimelinePath, _userTimelineParam);
     List _tweets = [];
     for (int i = 0; i < jsonData.length; i++){
-      final String _timeText = ConvertText().TwitterTimetamp(jsonData[i]['created_at']);
+      final String _timeText = ConvertText().twitterTimetamp(jsonData[i]['created_at']);
       _tweets.add(
         {
           'timeText': _timeText,

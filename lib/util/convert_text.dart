@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 class ConvertText {
-  String TwitterTimetamp(String timeText) {
+  String twitterTimetamp(String timeText) {
     DateTime _nowJst = DateTime.now().toLocal();
     DateTime _createdAt = DateFormat('EEE MMM d hh:mm:ss +0000 yyyy','en_US').parse(timeText, true);
     DateTime _createdAtJst = _createdAt.add(Duration(hours: 9));
