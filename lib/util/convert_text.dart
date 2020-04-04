@@ -1,6 +1,10 @@
 import 'package:intl/intl.dart';
 
 class ConvertText {
+  /// 取得したtimestampをTwitterの時間表示形式に変換する
+  /// 
+  /// [timeText]をDateTimeにpurseする。
+  /// 投稿からの経過時間を該当する形式で文字列として返却する。
   String twitterTimetamp(String timeText) {
     DateTime _nowJst = DateTime.now().toLocal();
     DateTime _createdAt = DateFormat('EEE MMM d hh:mm:ss +0000 yyyy','en_US').parse(timeText, true);
