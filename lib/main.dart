@@ -10,8 +10,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.pink[100],
       ),
-      home: Scaffold(   
-        bottomNavigationBar: RootWidget(),
+      home: SafeArea(
+        child: Scaffold(   
+          bottomNavigationBar: RootWidget(),
+        ),
       ),
     );
   }

@@ -4,9 +4,14 @@ import '../util/convert_text.dart';
 
 class TwitterCardModel {
 
-  Future<List> CreateCardList(String apiName) async{
+  /// カードのリストを作成する
+  /// 
+  /// 非同期でAPIから[apiName]の情報を取得する。
+  /// 取得した[_tweets]のデータを使用してcustomCardを作成する。
+  /// カードを追加した[_cardList]を返却する。
+  Future<List> createCardList(String apiName) async{
     List _cardList = [];
-    final _tweets = await GetTweetsJson(apiName);
+    final _tweets = await getTweetsJson(apiName);
 
     CustomCard customCard = CustomCard();
     for (var i = 0; i < _tweets.length; i++) {
@@ -15,7 +20,11 @@ class TwitterCardModel {
     return _cardList;
   }
 
-  Future<List> GetTweetsJson(String apiName) async{
+  /// tweet情報を取得する
+  /// 
+  /// [_userTimelinePath]のJsonデータを取得する。
+  /// 取得した[jsonData]から必要な情報を取得し、[_tweets]に詰めて返却する。
+  Future<List> getTweetsJson(String apiName) async{
     String _userTimelinePath;
     Map<String, String> _userTimelineParam;
 
@@ -35,10 +44,10 @@ class TwitterCardModel {
           };
     }
 
-    final jsonData = await TwitterApiModel().GetJson(_userTimelinePath, _userTimelineParam);
+    final jsonData = await TwitterApiModel().getJson(_userTimelinePath, _userTimelineParam);
     List _tweets = [];
     for (int i = 0; i < jsonData.length; i++){
-      final String _timeText = ConvertText().TwitterTimetamp(jsonData[i]['created_at']);
+      final String _timeText = ConvertText().twitterTimetamp(jsonData[i]['created_at']);
       _tweets.add(
         {
           'timeText': _timeText,
@@ -46,8 +55,8 @@ class TwitterCardModel {
           'screenName': jsonData[i]['user']['screen_name'],
           'profileImageUrlHttps': jsonData[i]['user']['profile_image_url_https'],
           'text': jsonData[i]['text'],
-          'favoriteCount': jsonData[i]['favorite_count'],
-          'retweetCount': jsonData[i]['retweet_count'],
+          'favoriteCount': jsonData[i]['favorite_count'] != 0 ? jsonData[i]['favorite_count'] : '',
+          'retweetCount': jsonData[i]['retweet_count'] != 0 ? jsonData[i]['retweet_count'] : '',
         }
       );
     }

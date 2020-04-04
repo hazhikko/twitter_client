@@ -19,7 +19,7 @@ class _Home extends State<Home> {
   }
 
   Future<void> _load() async {
-    _cardList = await TwitterCardModel().CreateCardList('home_timeline');
+    _cardList = await TwitterCardModel().createCardList('home_timeline');
   }
 
   @override
