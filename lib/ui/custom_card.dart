@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../routes/image_preview.dart';
 
 class CustomCard {
 
@@ -84,6 +85,7 @@ class _Image extends StatelessWidget {
   /// 指定がない場合はデフォルト値を使用。
   /// [height]、[width]、[borderRadius]、[padding]
   Widget _imageItem({
+    BuildContext context,
     String url,
     double height = double.infinity,
     double width = double.infinity,
@@ -93,23 +95,36 @@ class _Image extends StatelessWidget {
 
     borderRadius ??= BorderRadius.all(Radius.circular(0));
     padding ??= EdgeInsets.zero;
-    return Container(
-      width: width,
-      height: height,
-      padding: padding,
-      child: ClipRRect(
-        borderRadius: borderRadius,
-        child: Image.network(
-          url,
-          fit: BoxFit.cover,
+
+    Image image = Image.network(
+      url,
+      fit:BoxFit.cover
+    );
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImagePreview(image: image),
+          ),
+        );
+      },
+      child: Container(
+        width: width,
+        height: height,
+        padding: padding,
+        child: ClipRRect(
+          borderRadius: borderRadius,
+          child: image,
         ),
       ),
     );
   }
 
   /// 画像1枚用のウィジェット
-  Widget _image1(){
+  Widget _image1(BuildContext context){
     return _imageItem(
+      context: context,
       url: imageUrl[0],
       height: _imageHeight,
       borderRadius: BorderRadius.all(_radius),
@@ -117,11 +132,12 @@ class _Image extends StatelessWidget {
   }
 
   /// 画像2枚用のウィジェット
-  Widget _image2(){
+  Widget _image2(BuildContext context){
     return Row(
       children: <Widget>[
         Expanded(
           child: _imageItem(
+            context: context,
             url: imageUrl[1],
             height: _imageHeight,
             borderRadius: BorderRadius.only(
@@ -135,6 +151,7 @@ class _Image extends StatelessWidget {
         ),
         Expanded(
           child: _imageItem(
+            context: context,
             url: imageUrl[2],
             height: _imageHeight,
             borderRadius: BorderRadius.only(
@@ -151,11 +168,12 @@ class _Image extends StatelessWidget {
   }
 
   /// 画像3枚用のウィジェット
-  Widget _image3(){
+  Widget _image3(BuildContext context){
     return Row(
       children: <Widget>[
         Expanded(
           child: _imageItem(
+            context: context,
             url: imageUrl[1],
             height: _imageHeight,
             borderRadius: BorderRadius.only(
@@ -171,6 +189,7 @@ class _Image extends StatelessWidget {
           child: Column(
             children: <Widget>[
               _imageItem(
+                context: context,
                 url: imageUrl[2],
                 height: _imageHeight / 2,
                 borderRadius: BorderRadius.only(
@@ -182,6 +201,7 @@ class _Image extends StatelessWidget {
                 ),
               ),
               _imageItem(
+                context: context,
                 url: imageUrl[3],
                 height: _imageHeight / 2,
                 borderRadius: BorderRadius.only(
@@ -200,12 +220,13 @@ class _Image extends StatelessWidget {
   }
 
   /// 画像4枚用のウィジェット
-  Widget _image4() {
+  Widget _image4(BuildContext context) {
     return Table(
       children: [
         TableRow(
           children: [
             _imageItem(
+              context: context,
               url: imageUrl[1],
               height: _imageHeight / 2,
               borderRadius: BorderRadius.only(
@@ -217,6 +238,7 @@ class _Image extends StatelessWidget {
               ),
             ),
             _imageItem(
+              context: context,
               url: imageUrl[2],
               height: _imageHeight / 2,
               borderRadius: BorderRadius.only(
@@ -232,6 +254,7 @@ class _Image extends StatelessWidget {
         TableRow(
           children: [
             _imageItem(
+              context: context,
               url: imageUrl[3],
               height: _imageHeight / 2,
               borderRadius: BorderRadius.only(
@@ -243,6 +266,7 @@ class _Image extends StatelessWidget {
               ),
             ),
             _imageItem(
+              context: context,
               url: imageUrl[4],
               height: _imageHeight / 2,
               borderRadius: BorderRadius.only(
@@ -266,18 +290,18 @@ class _Image extends StatelessWidget {
     }
 
     if (imageUrl.length == 2) {
-      return _image1();
+      return _image1(context);
     }
 
     if (imageUrl.length == 3) {
-      return _image2();
+      return _image2(context);
     }
 
     if (imageUrl.length == 4) {
-      return _image3();
+      return _image3(context);
     }
 
-    return _image4();
+    return _image4(context);
   }
 }
 
