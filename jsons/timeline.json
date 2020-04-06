@@ -10,7 +10,8 @@
         "entities" : {
             "media" : [
                 {
-                    "media_url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg"
+                    "media_url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg",
+                    "url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg"
                 }
             ]
         },
@@ -44,7 +45,8 @@
         "entities" : {
             "media" : [
                 {
-                    "media_url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg"
+                    "media_url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg",
+                    "url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg"
                 }
             ]
         },
@@ -75,7 +77,8 @@
         "entities" : {
             "media" : [
                 {
-                    "media_url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg"
+                    "media_url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg",
+                    "url" : "http://nekodeki.com/wp-content/uploads/2020/02/P6260391-2.jpg"
                 }
             ]
         },
@@ -106,7 +109,7 @@
     },
     {
         "created_at" : "Wed Oct 10 20:19:24 +0000 2018",
-        "text" : "画像1枚",
+        "text" : "画像1枚_小さい画像",
         "user" : {
             "name" : "ユーザー名",
             "screen_name" : "スクリーン名",
@@ -115,7 +118,15 @@
         "entities" : {
             "media" : [
                 {
-                    "media_url" : "https://pbs.twimg.com/media/DYF_OWDVwAMH_VZ.jpg"
+                    "media_url" : "https://nekodeki.com/wp-content/uploads/2018/06/halloween-black-cat.png",
+                    "url" : "https://nekodeki.com/wp-content/uploads/2018/06/halloween-black-cat.png"
+                }
+            ]
+        },
+        "extended_entities" : {
+            "media" : [
+                {
+                    "media_url" : "https://nekodeki.com/wp-content/uploads/2018/06/halloween-black-cat.png"
                 }
             ]
         },
@@ -131,6 +142,14 @@
             "profile_image_url_https" : "http://nekodeki.com/wp-content/uploads/2020/03/logo_flutter.png"
         },
         "entities" : {
+            "media" : [
+                {
+                    "media_url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_縦長.png",
+                    "url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_縦長.png"
+                }
+            ]
+        },
+        "extended_entities" : {
             "media" : [
                 {
                     "media_url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_縦長.png"
@@ -149,6 +168,14 @@
             "profile_image_url_https" : "http://nekodeki.com/wp-content/uploads/2020/03/logo_flutter.png"
         },
         "entities" : {
+            "media" : [
+                {
+                    "media_url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_横長.jpg",
+                    "url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_横長.jpg"
+                }
+            ]
+        },
+        "extended_entities" : {
             "media" : [
                 {
                     "media_url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_横長.jpg"
