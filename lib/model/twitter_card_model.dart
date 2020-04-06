@@ -1,6 +1,7 @@
 import '../ui/custom_card.dart';
 import '../model/twitter_api_model.dart';
 import '../util/convert_text.dart';
+import '../util/get_local_object.dart';
 
 class TwitterCardModel {
 
@@ -15,7 +16,7 @@ class TwitterCardModel {
 
     CustomCard customCard = CustomCard();
     for (var i = 0; i < _tweets.length; i++) {
-      _cardList.add(customCard.createCard('text1', _tweets[i]));
+      _cardList.add(customCard.createCard(_tweets[i]));
     }
     return _cardList;
   }
@@ -44,17 +45,34 @@ class TwitterCardModel {
           };
     }
 
-    final jsonData = await TwitterApiModel().getJson(_userTimelinePath, _userTimelineParam);
+    // final jsonData = await TwitterApiModel().getJson(_userTimelinePath, _userTimelineParam);
+    final jsonData = await LoadLocalJson().getJson('jsons/timeline.json');
     List _tweets = [];
     for (int i = 0; i < jsonData.length; i++){
       final String _timeText = ConvertText().twitterTimetamp(jsonData[i]['created_at']);
+      final List<String> _images = [];
+
+      String _text = jsonData[i]['text'];
+      try {
+        _images.add(jsonData[i]['entities']['media'][0]['media_url']);
+        /// textに画像1枚目のURLが含まれているので削除する
+        if (_text.contains(jsonData[i]['entities']['media'][0]['url'])) {
+          _text = _text.replaceAll(jsonData[i]['entities']['media'][0]['url'], '');
+        }
+        for (var _url in jsonData[i]['extended_entities']['media']) {
+          _images.add(_url['media_url']);
+        }
+      } catch (e) {
+      }
+
       _tweets.add(
         {
           'timeText': _timeText,
           'name': jsonData[i]['user']['name'],
           'screenName': jsonData[i]['user']['screen_name'],
           'profileImageUrlHttps': jsonData[i]['user']['profile_image_url_https'],
-          'text': jsonData[i]['text'],
+          'text': _text,
+          'image': _images,
           'favoriteCount': jsonData[i]['favorite_count'] != 0 ? jsonData[i]['favorite_count'] : '',
           'retweetCount': jsonData[i]['retweet_count'] != 0 ? jsonData[i]['retweet_count'] : '',
         }
