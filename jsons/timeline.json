@@ -156,6 +156,13 @@
                 }
             ]
         },
+        "extended_entities" : {
+            "media" : [
+                {
+                    "media_url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_縦長.png"
+                }
+            ]
+        },
         "retweet_count" : 5,
         "favorite_count" : 10
     },
@@ -172,6 +179,13 @@
                 {
                     "media_url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_横長.jpg",
                     "url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_横長.jpg"
+                }
+            ]
+        },
+        "extended_entities" : {
+            "media" : [
+                {
+                    "media_url" : "https://nekodeki.com/wp-content/uploads/2020/04/サンプル_横長.jpg"
                 }
             ]
         },
